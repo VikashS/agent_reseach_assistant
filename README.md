@@ -33,6 +33,7 @@ Execution Loop
    ↓
 Final Response
 ```
+![project_diagram.png](diagram/project_diagram.png)
 
 ## Agent Workflow
 
