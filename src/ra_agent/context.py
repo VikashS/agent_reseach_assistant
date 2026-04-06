@@ -1,6 +1,3 @@
-"""Context management strategy to avoid token overflow"""
-
-
 class ContextManager:
     """Manages conversation context with token limits"""
 
@@ -12,7 +9,7 @@ class ContextManager:
         self.current_task = None
 
     def set_goal(self, goal):
-        """Store the original user goal (always kept)"""
+        """Store the original user goal need to check with HR"""
         self.user_goal = goal
 
     def set_plan(self, plan):
@@ -32,10 +29,10 @@ class ContextManager:
     def _truncate_result(self, result, task_type):
         """Different truncation strategies per task type"""
         if task_type == "search":
-            # For search results, keep only first 500 chars
+            # For search result keep only first 500 chars
             return result[:500] + "..." if len(result) > 500 else result
         elif task_type == "read":
-            # For URL reads, keep first 1000 chars
+            # For URL reads only 1000 chars
             return result[:1000] + "..." if len(result) > 1000 else result
         else:
             return result[:800] + "..." if len(result) > 800 else result
@@ -45,7 +42,7 @@ class ContextManager:
         return f"User goal: {self.user_goal}"
 
     def get_context_for_execution(self, task):
-        """Context for executing a specific task"""
+        """Context for running a specific task"""
         context_parts = [
             f"Original goal: {self.user_goal}",
             f"Current task: {task['description']}",
@@ -53,10 +50,10 @@ class ContextManager:
             f"Task query: {task.get('query', '')}",
         ]
 
-        # Add completed tasks summary (limited)
         if self.completed_tasks:
             context_parts.append("\nPreviously completed tasks:")
-            for t in self.completed_tasks[-2:]:  # Only last 2 tasks
+            # hardcoded to use use only last 2
+            for t in self.completed_tasks[-2:]:
                 context_parts.append(f"- {t['task']}: {t['result'][:200]}")
 
         return "\n".join(context_parts)
@@ -73,5 +70,5 @@ class ContextManager:
         return "\n".join(context_parts)
 
     def estimate_tokens(self, text):
-        """Rough token estimation (4 chars ~ 1 token)"""
+        """start withn 4 chars = 1 token"""
         return len(text) / 4

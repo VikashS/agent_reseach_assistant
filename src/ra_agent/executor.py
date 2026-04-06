@@ -1,5 +1,3 @@
-"""Execution loop - runs tasks and manages state"""
-
 from ra_agent.tools import Tools
 from ra_agent.context import ContextManager
 from ra_agent.llm import LLMClient
@@ -67,7 +65,6 @@ class Executor:
         result = self.tools.web_search(query)
 
         if result["success"]:
-            # If Tavily provided an answer, highlight it
             if result.get("answer"):
                 return f" {result['formatted']}\n Tavily Answer: {result['answer']}"
             return result["formatted"]
@@ -99,15 +96,10 @@ class Executor:
         """Execute a summarization task using LLM"""
         context = self.context.get_context_for_summary()
         query = task.get("query", "Provide a summary of the findings")
-
         prompt = f"""Based on the following research results, provide a clear summary.
-
-Context:
-{context}
-
-Task: {query}
-
-Provide a concise, well-structured answer (2-3 paragraphs)."""
+                 Context:{context}
+                 Task: {query} 
+                 Provide a concise, well-structured answer (2-3 paragraphs)."""
 
         response = self.llm.chat(
             messages=[
@@ -131,7 +123,10 @@ Provide a concise, well-structured answer (2-3 paragraphs)."""
         """Generate final user-friendly output"""
         context = self.context.get_context_for_summary()
 
-        prompt = GENERATE_FINAL_OUTPUT
+        prompt = GENERATE_FINAL_OUTPUT.format(
+            user_goal=self.context.user_goal,
+            context=context
+        )
         response = self.llm.chat(
             messages=[
                 {"role": "system", "content": "You create clear, actionable reports from research."},

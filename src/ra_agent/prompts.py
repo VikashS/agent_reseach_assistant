@@ -1,4 +1,3 @@
-"""LLM Prompts for the research assistant"""
 
 PLAN_CREATE_PROMPT_TEMPLATE = """You are a planning assistant. Output ONLY valid JSON."""
 
@@ -42,7 +41,7 @@ Generate a plan for the user's goal. Output ONLY the JSON array, no other text.
 
 
 GENERATE_FINAL_OUTPUT = """Create a final, user-friendly report answering the original goal.
-                  Original goal: {self.context.user_goal}
+                  Original goal: {user_goal}
                   Research findings:
                   {context}
                   Provide a clear, organized response with:
@@ -50,4 +49,3 @@ GENERATE_FINAL_OUTPUT = """Create a final, user-friendly report answering the or
                   2. Key findings (bullet points)
                   3. Actionable recommendations (if applicable)
                   Keep it concise but informative."""
-

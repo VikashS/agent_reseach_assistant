@@ -1,5 +1,3 @@
-"""Real tools for the agent - Tavily search + URL reading"""
-
 import requests
 from typing import Dict, Any, List
 import os

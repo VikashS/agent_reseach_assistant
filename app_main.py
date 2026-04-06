@@ -1,19 +1,13 @@
-#!/usr/bin/env python3
-"""Main entry point for the Research Assistant Agent"""
+"""Entry point for the Research Assistant Agent"""
 
 import sys
 import time
 from ra_agent.planner import Planner
 from ra_agent.executor import Executor
 from ra_agent.context import ContextManager
-from ra_agent.llm import LLMClient
-
 
 
 def main():
-    # Show configuration
-    llm = LLMClient()
-
     # Get user goal
     print("\nWhat goal would you like help with?")
     print("Examples: research a topic, compare technologies, plan a project\n")
@@ -50,7 +44,7 @@ def main():
     proceed = input("\n Proceed with execution? (y/n): ").strip().lower()
 
     if proceed != 'y':
-        print("Execution cancelled. Goodbye!")
+        print("Execution cancelled. Bye")
         return
 
     # Step 3: Execution
@@ -87,5 +81,5 @@ if __name__ == "__main__":
         sys.exit(0)
     except Exception as e:
         print(f"\n Error: {e}")
-        print("Please check your configuration in .env file")
+        print("Please add your details in .env file")
         sys.exit(1)

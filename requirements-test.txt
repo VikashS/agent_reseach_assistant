@@ -1,0 +1,12 @@
+# Testing dependencies
+pytest>=7.0.0
+pytest-mock>=3.0.0  # For mocker fixture
+pytest-cov>=4.0.0
+
+# Mocking
+unittest.mock  # Usually built-in with Python 3.3+
+
+# Your existing dependencies
+openai>=1.0.0
+python-dotenv>=1.0.0
+requests>=2.25.0

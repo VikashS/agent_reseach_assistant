@@ -4,16 +4,16 @@ An Basic AI agent that transforms high-level user goals into executable tasks an
 
 ## Goal of the Project
 
-The core focus here is on robust execution. We turn users goals into structured plans, run tasks one by one, handle errors gracefully, and manage limited context effectively to keep things running smoothly.
+The core focus here is on simple/robust execution. I turn users goals into structured plans, run tasks one by one, handle errors , 
+and manage limited context effectively to keep things running smoothly.
 
 ## Key Highlights
 
 - **Goal → Plan → Execute → Report Pipeline**: A straightforward flow from input to output.
 - **Dynamic Task Generation**: Uses LLM reasoning to break down goals into actionable steps.
-- **Tool Integration**: Includes search and URL reading capabilities with built-in fallbacks.
-- **Context Management**: Employs a sliding window and truncation to stay within limits.
+- **Tool Integration**: Includes search and URL reading capabilities .
+- **Context Management**: Added a sliding window and truncation to stay within limits.
 - **Proper Logs**: Detailed execution logs for easy debugging and building trust.
-- **Failure Recovery**: Automatic fallbacks when tools encounter issues.
 
 ## Architecture Overview
 
@@ -33,7 +33,6 @@ Execution Loop
    ↓
 Final Response
 ```
-![project_diagram.png](diagram/project_diagram.png)
 
 ## Agent Workflow
 
@@ -41,7 +40,7 @@ Final Response
 2. **Execution**: Tasks are run one after another. Progress is tracked, and intermediate results are stored for reference.
 3. **Reporting**: All outputs are gathered and summarized into a clear, structured final response.
 
-## Context Strategy
+## Manual Context Strategy
 
 To prevent token limits from causing issues while keeping responses relevant, we manage context carefully:
 
@@ -50,31 +49,42 @@ To prevent token limits from causing issues while keeping responses relevant, we
 - Truncate lengthy outputs to 500–1000 characters.
 - Discard older, less important information.
 
-## Evaluation Coverage
+## Evaluation
 
-We test the agent across various scenarios to ensure reliability:
+We test the agent across main scenarios to ensure reliabilit such as long context .
 
-| Scenario          | What It Tests                  |
-|-------------------|--------------------------------|
-| Fact Retrieval    | Accuracy and speed             |
-| Comparison Tasks  | Decomposition and reasoning    |
-| Ambiguous Goals   | Handling clarification         |
-| Tool Failure      | Resilience and fallback        |
-| Long Context      | Memory and summarization       |
 
-## Trade-offs
+## Trade offs
+- **No Frameworks**: I have added custom agent loop in absense of standard frame work.
+ # Custom loop (my approach)
+ for task in tasks:
+    if task.type == "search":
+        result = search_web(task.query)
+    elif task.type == "summarize":
+        result = llm_summarize(context)
 
-- **No Frameworks**: Gives us full control but requires more effort to implement.
 - **Sequential Execution**: Keeps things simple and predictable, though it's slower than running tasks in parallel.
-- **Lightweight Memory**: Efficient for most cases, but doesn't offer perfect recall.
+- **Lightweight Memory**: Good for most cases, but not efficient for recall.
+- **Search Tools**: Use Only tavily so no falllback.
 
 ## Future Improvements
 
 - Implement parallel task execution to boost speed.
 - Upgrade to better memory systems, like vector databases for retrieval.
-- Develop an easy-to-use plugin system for tools.
 - Add evaluation metrics, such as precision and task success rates.
 - Incorporate user feedback loops for continuous learning.
 - Enhance reasoning with multi-hop and chain-of-thought techniques.
 - Improve error handling and recovery strategies.
 - Prioritize architecture and reliability.
+- From code prospective will integrate FastAPI for better API management and modularity.
+- Integrate with Pydentic for better data validation and structured task management.
+
+
+## Note: add youe details in .env to run the code successfully
+OLLAMA_BASE_URL="http://localhost:11434"
+OLLAMA_MODEL="llama3.1:8b"
+TAVILY_API_KEY="your_tavily_api_key_here"
+SEARCH_PROVIDER="tavily"
+OPENAI_MODEL=gpt-4.1
+OPENAI_API_KEY="your_openai_api_key_here" 
+

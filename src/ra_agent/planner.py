@@ -1,10 +1,7 @@
-"""Planning module - converts user goals into structured TODO plans"""
-
 import json
 import textwrap
 from ra_agent.llm import LLMClient
 from ra_agent.prompts import PLANNING_PROMPT_TEMPLATE
-
 from ra_agent.prompts import PLAN_CREATE_PROMPT_TEMPLATE
 
 TEMPRATURE = 0.3
