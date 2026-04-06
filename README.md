@@ -49,14 +49,65 @@ To prevent token limits from causing issues while keeping responses relevant, we
 - Truncate lengthy outputs to 500–1000 characters.
 - Discard older, less important information.
 
-## Evaluation
+## Evaluation Scenarios & Success Criteria
+### Scenario 1: Simple Fact Finding Goal (Test basic information retrieval and fact extraction)
+Goal: Who won the Cricket World Cup in 2011? 
+
+**Success Criteria:**
+- Agent creates plan with 2-3 tasks
+- Search return India as winner
+- Final output correctly identifies India
+- Execution completes within 4 seconds
+
+
+### Scenario 2: Tool Failure Recovery (Test robustness and graceful degradation)
+Goal: Latest T20 Cricket news (with invalid API key)
+
+**Success Criteria:**
+- Agent handles error without crashing
+- Returns meaningful error message
+- Suggests previous contexxt
+- Continues execution
+
+
+### Scenario 3: Long Context (Tests context window management under control loads)
+Goal: Research AI history from 1900 to 2026, Quantum Computing, deep learning, and transformers
+
+**Success Criteria:**
+- Creates 5 search tasks for different time
+- No token overflow errors
+- Final summary mentions multiple time periods
+- Completes within 14 seconds
+
+
+### Scenario 4: Multi-Step Comparison (Test planning depth and information synthesis)
+Goal: Compare Panda vs Pyspark for beginners
+
+**Success Criteria:**
+- Plan has 3 tasks
+- Both languages mentioned in results
+- Final output includes comparison or recommendation
+
+
+### Scenario 5: Ambiguous Goal Handling(Test ability to handle vagueness and seek clarification.)
+Goal: Help me learn programming"`
+
+**Success Criteria:**
+- Agent creates plan with clarification task
+- Plan asks for specific language or area
+- Output adapts based on user response
+- Provides actionable learning path
+
+
 
 We test the agent across main scenarios to ensure reliabilit such as long context .
 
 
 ## Trade offs
 - **No Frameworks**: I have added custom agent loop in absense of standard frame work.
- # Custom loop (my approach)
+ 
+- -- Custom loop (my approach)
+
  for task in tasks:
     if task.type == "search":
         result = search_web(task.query)
