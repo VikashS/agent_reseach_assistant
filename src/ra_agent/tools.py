@@ -1,5 +1,6 @@
 import os
 from typing import Any, Dict, List
+import re
 
 import requests
 from dotenv import load_dotenv
@@ -38,10 +39,10 @@ class Tools:
             # Tavily automatically extracts relevant content
             response = client.search(
                 query=query,
-                search_depth="basic",  # or "advanced" for more thorough
+                search_depth="basic",
                 max_results=max_results,
-                include_answer=True,  # Tavily provides a direct answer
-                include_raw_content=False,  # Keep it lean
+                include_answer=True,
+                include_raw_content=False,
                 include_images=False,
             )
 
@@ -73,9 +74,6 @@ class Tools:
             headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"}
             response = requests.get(url, headers=headers, timeout=10)
             response.raise_for_status()
-
-            # Simple text extraction
-            import re
 
             content = response.text
             text = re.sub(r"<[^>]+>", " ", content)

@@ -123,19 +123,27 @@ We test the agent across main scenarios to ensure reliabilit such as long contex
 - Implement parallel task execution to boost speed.
 - Upgrade to better memory systems, like vector databases for retrieval.
 - Add evaluation metrics, such as precision and task success rates.
-- Incorporate user feedback loops for continuous learning.
-- Enhance reasoning with multi-hop and chain-of-thought techniques.
+- Enhance reasoning with chain-of-thought techniques.
 - Improve error handling and recovery strategies.
 - Prioritize architecture and reliability.
 - From code prospective will integrate FastAPI for better API management and modularity.
 - Integrate with Pydentic for better data validation and structured task management.
 
-
-## Note: add youe details in .env to run the code successfully
+# step to run the code
+## add youe details in .env to run the code successfully ( local run ollama or openai api key)
 OLLAMA_BASE_URL="http://localhost:11434"
 OLLAMA_MODEL="llama3.1:8b"
 TAVILY_API_KEY="your_tavily_api_key_here"
 SEARCH_PROVIDER="tavily"
 OPENAI_MODEL=gpt-4.1
 OPENAI_API_KEY="your_openai_api_key_here" 
+
+
+## install the dependencies
+pip install uv
+pip install .
+
+# run the agent
+python app_main.py
+
 
