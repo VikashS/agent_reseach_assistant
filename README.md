@@ -130,7 +130,7 @@ We test the agent across main scenarios to ensure reliabilit such as long contex
 - Integrate with Pydentic for better data validation and structured task management.
 
 # step to run the code
-## add youe details in .env to run the code successfully ( local run ollama or openai api key)
+## add youe details in .env at project root level to run the code successfully ( local run ollama or openai api key)
 OLLAMA_BASE_URL="http://localhost:11434"
 OLLAMA_MODEL="llama3.1:8b"
 TAVILY_API_KEY="your_tavily_api_key_here"
