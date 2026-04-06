@@ -1,8 +1,7 @@
-from ra_agent.tools import Tools
 from ra_agent.context import ContextManager
 from ra_agent.llm import LLMClient
-
 from ra_agent.prompts import GENERATE_FINAL_OUTPUT
+from ra_agent.tools import Tools
 
 
 class Executor:
@@ -123,10 +122,7 @@ class Executor:
         """Generate final user-friendly output"""
         context = self.context.get_context_for_summary()
 
-        prompt = GENERATE_FINAL_OUTPUT.format(
-            user_goal=self.context.user_goal,
-            context=context
-        )
+        prompt = GENERATE_FINAL_OUTPUT.format(user_goal=self.context.user_goal, context=context)
         response = self.llm.chat(
             messages=[
                 {"role": "system", "content": "You create clear, actionable reports from research."},

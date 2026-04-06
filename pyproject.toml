@@ -12,6 +12,7 @@ dependencies = [
     "isort>=8.0.1",
     "ollama==0.1.9",
     "openai>=2.30.0",
+    "pylint>=4.0.5",
     "pytest>=9.0.2",
     "python-dotenv>=1.2.2",
     "requests==2.33.1",

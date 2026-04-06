@@ -1,4 +1,3 @@
-
 PLAN_CREATE_PROMPT_TEMPLATE = """You are a planning assistant. Output ONLY valid JSON."""
 
 PLANNING_PROMPT_TEMPLATE = """

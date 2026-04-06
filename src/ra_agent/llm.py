@@ -1,6 +1,7 @@
-import requests
 import json
 import os
+
+import requests
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -30,6 +31,8 @@ load_dotenv()
 
 ##To use OpenAI instead, uncomment below all
 from openai import OpenAI
+
+
 class LLMClient:
     def __init__(self):
         load_dotenv()
@@ -41,5 +44,3 @@ class LLMClient:
             model=self.model, messages=messages, temperature=temperature, max_tokens=max_tokens
         )
         return response.choices[0].message.content
-
-

@@ -1,6 +1,7 @@
-import requests
-from typing import Dict, Any, List
 import os
+from typing import Any, Dict, List
+
+import requests
 from dotenv import load_dotenv
 
 load_dotenv()

@@ -1,8 +1,8 @@
 import json
 import textwrap
+
 from ra_agent.llm import LLMClient
-from ra_agent.prompts import PLANNING_PROMPT_TEMPLATE
-from ra_agent.prompts import PLAN_CREATE_PROMPT_TEMPLATE
+from ra_agent.prompts import PLAN_CREATE_PROMPT_TEMPLATE, PLANNING_PROMPT_TEMPLATE
 
 TEMPRATURE = 0.3
 MAX_TOKENS = 1000
@@ -78,4 +78,3 @@ class Planner:
         except Exception as e:
             print(f"Planning failed: {e}")
             return self._fallback_plan(user_goal)
-
