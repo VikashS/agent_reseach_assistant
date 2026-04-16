@@ -23,8 +23,9 @@ def main():
     context = ContextManager()
     context.set_goal(user_goal)
 
-    planner = Planner()
     executor = Executor(context)
+    planner = Planner()
+
 
     # Step 1: Planning
     print("\n" + "=" * 60)

@@ -26,7 +26,7 @@ class Executor:
         completed_tasks = []
 
         for i, task in enumerate(plan, 1):
-            print(f"\n📋 Task {i}/{len(plan)}: {task['description']}")
+            print(f"\n Task {i}/{len(plan)}: {task['description']}")
             print(f"   Type: {task['type']}")
 
             result = self._execute_task(task)
